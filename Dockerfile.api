@@ -18,6 +18,8 @@ COPY requirements/base.txt /app/requirements/base.txt
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r /app/requirements/base.txt
 
+COPY . /app
+
 # Expose the default port used by the API
 EXPOSE 8000
 
