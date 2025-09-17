@@ -28,7 +28,7 @@ services:
     environment:
       WEB_CONCURRENCY: 1
       LOG_LEVEL: info
-    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    command: ["sh","-c","uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --reload"]
     volumes:
       - ./app:/app/app
     depends_on:
