@@ -1,0 +1,26 @@
+# Use Python 3.12 slim as the base image as requested
+FROM python:3.12-slim
+
+# Prevent Python from writing .pyc files and enable unbuffered output
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+# Set workdir
+WORKDIR /app
+
+# Install runtime dependencies and build tools for common Python packages (e.g., psycopg2)
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install required Python packages using a requirements file
+COPY requirements/base.txt /app/requirements/base.txt
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r /app/requirements/base.txt
+
+# Expose the default port used by the API
+EXPOSE 8000
+
+# By default, run the FastAPI app with Uvicorn
+# Expect application entrypoint at app/main.py with variable `app`
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
