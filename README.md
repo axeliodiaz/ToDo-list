@@ -7,7 +7,7 @@ Project to handle a ToDo list app with FastAPI
 1) Create your environment file from the example and adjust values if needed:
    - macOS/Linux: `cp .env.example .env`
    - Windows (PowerShell): `Copy-Item .env.example .env`
-
+    
 2) Start the services:
    - `docker compose up --build`
 
