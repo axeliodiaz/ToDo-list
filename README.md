@@ -7,13 +7,30 @@ Project to handle a ToDo list app with FastAPI
 1) Create your environment file from the example and adjust values if needed:
    - macOS/Linux: `cp .env.example .env`
    - Windows (PowerShell): `Copy-Item .env.example .env`
-
+    
 2) Start the services:
    - `docker compose up --build`
 
 3) Access the API:
    - Base URL: http://localhost:8000
    - Interactive docs: http://localhost:8000/docs
+
+## Code style and pre-commit
+
+This project uses Black for code formatting and pre-commit to enforce it.
+
+Setup (one-time):
+- Install dev requirements: `pip install -r requirements/local.txt`
+- Install Git hook: `pre-commit install`
+
+Usage:
+- Check formatting only: `pre-commit run black-check --all-files`
+- Auto-fix formatting: `pre-commit run black-fix --all-files`
+- On each commit, pre-commit will run and prevent commits if checks fail.
+
+Notes:
+- Black version is pinned in requirements/local.txt and the pre-commit config.
+- To update hooks: `pre-commit autoupdate` (then commit the updated .pre-commit-config.yaml).
 
 ## Environment variables
 
