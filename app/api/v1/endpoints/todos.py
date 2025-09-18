@@ -35,7 +35,7 @@ class TodoRepository:
                 # actualizar solo el modified_at
                 todo.modified_at = datetime.now(UTC)
                 return todo
-        raise exceptions.TODO_404_NOT_FOUND
+        raise exceptions.NotFoundException
 
     @staticmethod
     @router.delete("/todos/{todo_id}", status_code=204)
@@ -44,4 +44,4 @@ class TodoRepository:
             if todo.id == todo_id:
                 todos.pop(idx)
                 return
-        raise exceptions.TODO_404_NOT_FOUND
+        raise exceptions.NotFoundException
