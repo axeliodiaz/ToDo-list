@@ -1,0 +1,1 @@
+TODO_404_NOT_FOUND_DETAIL_MESSAGE = "Todo not found"

@@ -1,8 +1,9 @@
 import uuid
 from datetime import UTC, datetime
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from app.schemas.todo import TodoCreate, TodoRead, TodoUpdate
+from app.core import exceptions
 
 router = APIRouter()
 
@@ -34,7 +35,7 @@ class TodoRepository:
                 # actualizar solo el modified_at
                 todo.modified_at = datetime.now(UTC)
                 return todo
-        raise HTTPException(status_code=404, detail="Todo not found")
+        raise exceptions.TODO_404_NOT_FOUND
 
     @staticmethod
     @router.delete("/todos/{todo_id}", status_code=204)
@@ -43,4 +44,4 @@ class TodoRepository:
             if todo.id == todo_id:
                 todos.pop(idx)
                 return
-        raise HTTPException(status_code=404, detail="Todo not found")
+        raise exceptions.TODO_404_NOT_FOUND
